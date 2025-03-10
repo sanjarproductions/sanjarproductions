@@ -4,33 +4,32 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import dateFormat from "dateformat";
 import { FaCircle } from "react-icons/fa";
+import http from "@/services/http";
+import LoadingBox from "@/app/components/elements/loading-box";
 
 const PostPage = () => {
-    const { slug } = useParams(); // ✅ Get the post ID from URL
+    const { slug } = useParams();
     const [post, setPost] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    async function getPost() {
+        setLoading(true)
+        try {
+            const resp = await http.post('post', { postId: slug })
+            setPost(resp.data)
+        } catch (err) {
+            console.log('err', err);
+        }
+        setLoading(false)
+    }
+
+
     useEffect(() => {
         if (!slug) return;
-
-        fetch("/api/notion", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ postId: slug })
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setPost(data.results[0] || null);
-                setLoading(false);
-            })
-            .catch((err) => {
-                console.error("❌ Error fetching post:", err);
-                setLoading(false);
-            });
+        getPost()
     }, [slug]);
 
-    // if (loading) return <p>Loading...</p>;
-    if (!post) return <p>Post not found.</p>;
+    if (!post && !loading) return <p>Post not found.</p>;
 
     let postDate = dateFormat(post?.properties?.Date?.date?.start, "mediumDate");
 
@@ -51,9 +50,8 @@ const PostPage = () => {
                     </div>
                 </div>
 
-                {/* ✅ Render post content properly */}
                 <div className="post-content">
-                    {post?.properties?.Content?.rich_text.map((block, index) => {
+                    {loading ? <LoadingBox /> : post?.properties?.Content?.rich_text.map((block, index) => {
                         if (!block.plain_text.trim()) return null; // Skip empty blocks
 
                         if (block.annotations.bold) {

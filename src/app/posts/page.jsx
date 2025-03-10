@@ -1,20 +1,31 @@
 "use client"
 import Link from 'next/link'
 import Nav from '../components/nav/Nav'
-import dateFormat, { masks } from "dateformat";
+import dateFormat from "dateformat";
 import { useEffect, useState } from 'react'
+import http from '@/services/http';
+import { VscLoading } from 'react-icons/vsc';
+import LoadingBox from '../components/elements/loading-box';
 
 const AllPosts = () => {
+  const [loading, setLoading] = useState(false)
   const [posts, setPosts] = useState([])
 
+  async function getPosts() {
+    setLoading(true)
+    try {
+      const resp = await http.post('posts', {})
+      setPosts(resp.data?.results)
+    } catch (err) {
+      console.log('err', err);
+    }
+    setLoading(false)
+  }
+
   useEffect(() => {
-    fetch("/api/notion", { method: "POST" })
-      .then(res => res.json())
-      .then(data => {
-        setPosts(data.results);
-      })
-      .catch(err => console.error("Error fetching posts:", err));
+    getPosts()
   }, [])
+
   let postDate = dateFormat(posts[0]?.properties?.Date?.date?.start, "mediumDate");
 
   return (
@@ -24,7 +35,7 @@ const AllPosts = () => {
 
       <div className="posts-wrapper">
         {
-          posts.map(({ id, properties }) =>
+          loading ? <LoadingBox /> : posts.map(({ id, properties }) =>
             <Link href={`posts/${id}`} className='post-card' key={id}>
               <div className="flex post-header">
                 <strong className='post-title'>{properties?.Title?.title[0]?.plain_text}</strong>
