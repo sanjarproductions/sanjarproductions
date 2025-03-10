@@ -161,6 +161,42 @@ footer {
   color: #d1d5db;
 }
 
+.post-meta {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+  color: #9ca3af;
+  font-size: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.post-meta .category {
+  background: #374151;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.post-meta .author {
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.author-avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-left: 4px;
+}
+
+.post-meta .edited {
+  color: #6b7280;
+  font-size: 12px;
+}
+
 .back-link {
   color: #fff;
 }
@@ -206,4 +242,118 @@ footer {
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Post Content */
+.post-content {
+  color: #e5e7eb;
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+.post-content h1 {
+  font-size: 2em;
+  font-weight: 700;
+  margin: 1.5em 0 0.5em;
+}
+
+.post-content h2 {
+  font-size: 1.5em;
+  font-weight: 600;
+  margin: 1.4em 0 0.4em;
+}
+
+.post-content h3 {
+  font-size: 1.25em;
+  font-weight: 600;
+  margin: 1.3em 0 0.3em;
+}
+
+.post-content p {
+  margin-bottom: 1.2em;
+}
+
+.post-content pre {
+  background: #1f2937;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1.5em 0;
+}
+
+.post-content code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.9em;
+}
+
+.post-content blockquote {
+  border-left: 4px solid #4b5563;
+  padding-left: 1rem;
+  margin: 1.5em 0;
+  font-style: italic;
+  color: #9ca3af;
+}
+
+.post-content ul,
+.post-content ol {
+  margin: 1.2em 0;
+  padding-left: 1.5em;
+}
+
+.post-content li {
+  margin: 0.5em 0;
+}
+
+.post-content hr {
+  border: none;
+  border-top: 1px solid #374151;
+  margin: 2em 0;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.mb-3 {
+  margin-bottom: 0.75rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
+.ml-6 {
+  margin-left: 1.5rem;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.error {
+  color: #ef4444;
+  font-weight: 500;
 }
