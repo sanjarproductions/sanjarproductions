@@ -8,10 +8,9 @@ export default function Home() {
     <>
       <div className="container page">
         <h1 className="page-title">home</h1>
-        <Nav />
+        {/* <Nav /> */}
         <div className="main">
-          <p className="desc">Hey, My name is <span>Sanjar</span>, I'm a Frontend Developer and the founder of Kivi Studio.
-            I enjoy working with React.js, Next.js, and Tailwind CSS, building sleek and modern web applications.</p>
+          <p className="desc">On a mission to turn dreams into <span>reality</span>. Learning from the best, I'm documenting my path to success.</p>
 
           <div className="line-home"></div>
 
@@ -19,10 +18,10 @@ export default function Home() {
             <h2>Connect with me</h2>
             <ul>
               {/* <li>Twitter<a href="https://x.com/sanjarprod">@sanjarprod</a></li> */}
-              <li><FaCircle className="link-circle"/> Link<a href="#">@sanjarproductions</a></li>
-              <li><FaCircle className="link-circle"/> Link<a href="#">@sanjarproductions</a></li>
-              <li><FaCircle className="link-circle"/> Email<a href="mailto:sanjarkama26@gmail.com">sanjarkama26@gmail.com</a></li>
-              <li><FaCircle className="link-circle"/> Email<a href="mailto:sanjarkama26@gmail.com">sanjarkama26@gmail.com</a></li>
+              <li><FaCircle className="link-circle" /> Instagram<a href="https://www.instagram.com/sanjarproductions">@sanjarproductions</a></li>
+              <li><FaCircle className="link-circle" /> Agency<a href="https://www.kivistudio.uz">kivistudio</a></li>
+              <li><FaCircle className="link-circle" /> Discord<a href="https://discord.gg/7WSrsCfGFm">@sanjarproductions</a></li>
+              <li><FaCircle className="link-circle" /> Email<a href="mailto:sanjarkama26@gmail.com">sanjarkama26@gmail.com</a></li>
             </ul>
           </div>
         </div>
