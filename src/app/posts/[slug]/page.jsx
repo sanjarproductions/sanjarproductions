@@ -13,14 +13,14 @@ const PostPage = () => {
     useEffect(() => {
         if (!slug) return;
 
-        fetch("/api/notion", {
+        fetch(`/api/blog`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ postId: slug })
         })
             .then((res) => res.json())
             .then((data) => {
-                setPost(data.results[0] || null);
+                setPost(data || null);
                 setLoading(false);
             })
             .catch((err) => {
