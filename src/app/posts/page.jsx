@@ -3,17 +3,22 @@ import Link from 'next/link'
 import Nav from '../components/nav/Nav'
 import dateFormat from "dateformat";
 import { useEffect, useState } from 'react'
+import http from '@/services/http';
 
 const AllPosts = () => {
   const [posts, setPosts] = useState([])
 
+  async function getPosts() {
+    try {
+      const resp = await http.post('posts', {})
+      setPosts(resp.data?.results)
+    } catch (err) {
+      console.log('err', err);
+    }
+  }
+
   useEffect(() => {
-    fetch("/api/posts", { method: "POST" })
-      .then(res => res.json())
-      .then(data => {
-        setPosts(data.results);
-      })
-      .catch(err => console.error("Error fetching posts:", err));
+    getPosts()
   }, [])
 
   let postDate = dateFormat(posts[0]?.properties?.Date?.date?.start, "mediumDate");
