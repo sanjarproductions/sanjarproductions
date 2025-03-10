@@ -5,6 +5,7 @@ import Link from "next/link";
 import dateFormat from "dateformat";
 import { FaCircle } from "react-icons/fa";
 import http from "@/services/http";
+import LoadingBox from "@/app/components/elements/loading-box";
 
 const PostPage = () => {
     const { slug } = useParams();
@@ -28,8 +29,7 @@ const PostPage = () => {
         getPost()
     }, [slug]);
 
-    if (loading) return <p>Loading...</p>;
-    if (!post) return <p>Post not found.</p>;
+    if (!post && !loading) return <p>Post not found.</p>;
 
     let postDate = dateFormat(post?.properties?.Date?.date?.start, "mediumDate");
 
@@ -51,7 +51,7 @@ const PostPage = () => {
                 </div>
 
                 <div className="post-content">
-                    {post?.properties?.Content?.rich_text.map((block, index) => {
+                    {loading ? <LoadingBox /> : post?.properties?.Content?.rich_text.map((block, index) => {
                         if (!block.plain_text.trim()) return null; // Skip empty blocks
 
                         if (block.annotations.bold) {

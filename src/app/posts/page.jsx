@@ -4,17 +4,22 @@ import Nav from '../components/nav/Nav'
 import dateFormat from "dateformat";
 import { useEffect, useState } from 'react'
 import http from '@/services/http';
+import { VscLoading } from 'react-icons/vsc';
+import LoadingBox from '../components/elements/loading-box';
 
 const AllPosts = () => {
+  const [loading, setLoading] = useState(false)
   const [posts, setPosts] = useState([])
 
   async function getPosts() {
+    setLoading(true)
     try {
       const resp = await http.post('posts', {})
       setPosts(resp.data?.results)
     } catch (err) {
       console.log('err', err);
     }
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -30,7 +35,7 @@ const AllPosts = () => {
 
       <div className="posts-wrapper">
         {
-          posts?.length ? posts.map(({ id, properties }) =>
+          loading ? <LoadingBox /> : posts.map(({ id, properties }) =>
             <Link href={`posts/${id}`} className='post-card' key={id}>
               <div className="flex post-header">
                 <strong className='post-title'>{properties?.Title?.title[0]?.plain_text}</strong>
@@ -38,7 +43,7 @@ const AllPosts = () => {
               </div>
               <p className='post-desc'>{properties?.Description?.rich_text[0]?.plain_text}</p>
             </Link>
-          ) : "Empty"}
+          )}
       </div>
 
     </div>
