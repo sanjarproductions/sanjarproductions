@@ -1,93 +1,37 @@
-"use client"
-import Link from 'next/link'
-import Nav from '../components/nav/Nav'
+import Link from "next/link";
+import Nav from "../components/nav/Nav";
 import dateFormat from "dateformat";
-import { useEffect, useState } from 'react'
-import http from '@/services/http';
-import { VscLoading } from 'react-icons/vsc';
-import LoadingBox from '../components/elements/loading-box';
 
-const AllPosts = () => {
-  const [loading, setLoading] = useState(false)
-  const [posts, setPosts] = useState([])
-  const [error, setError] = useState(null)
+const MANUAL_POSTS = [
+  {
+    slug: "growing-up-in-a-3rd-world-country-be-like",
+    title: "Growing Up in a 3rd World Country be like",
+    date: "2026-02-28",
+    desc: "",
+  },
+];
 
-  async function getPosts() {
-    setLoading(true)
-    setError(null)
-    try {
-      const resp = await http.post('posts', {})
-      console.log('Posts response:', resp.data)
-      setPosts(resp.data?.results || [])
-    } catch (err) {
-      console.error('Error fetching posts:', err)
-      setError(err.message)
-    }
-    setLoading(false)
-  }
-
-  useEffect(() => {
-    getPosts()
-  }, [])
-
+export default function PostsPage() {
   return (
-    <div className='container page'>
-      <h1 className="page-title">posts</h1>
+    <div className="container page">
       <Nav />
+      <h1 className="page-title">posts</h1>
 
       <div className="posts-wrapper">
-        {loading ? (
-          <LoadingBox />
-        ) : error ? (
-          <p>Error: {error}</p>
-        ) : posts.length === 0 ? (
-          <p>No posts found.</p>
-        ) : (
-          posts.map((post) => {
-            const { id, properties, created_time, last_edited_time, url } = post;
-            
-            // Get all the property values
-            const title = properties['Doc name']?.title?.[0]?.plain_text;
-            const category = properties['Category']?.select;
-            const createdBy = properties['Created by']?.people?.[0];
-            const createdTime = properties['Created time']?.created_time;
-            
-            const displayDate = dateFormat(createdTime || created_time, "mediumDate");
-            const lastEdited = dateFormat(last_edited_time, "mediumDate");
-            
-            return (
-              <Link href={`posts/${id}`} className='post-card' key={id}>
-                <div className="flex post-header">
-                  <strong className='post-title'>{title || 'Untitled'}</strong>
-                  <i className='post-date'>{displayDate}</i>
-                </div>
-                <div className="post-meta">
-                  {category && (
-                    <span className="category" style={category.color ? { backgroundColor: category.color } : undefined}>
-                      {category.name}
-                    </span>
-                  )}
-                  {createdBy && (
-                    <span className="author">
-                      By {createdBy.name}
-                      {createdBy.avatar_url && (
-                        <img 
-                          src={createdBy.avatar_url} 
-                          alt={createdBy.name} 
-                          className="author-avatar"
-                        />
-                      )}
-                    </span>
-                  )}
-                  <span className="edited">Last edited: {lastEdited}</span>
-                </div>
-              </Link>
-            );
-          })
-        )}
+        {MANUAL_POSTS.map((post) => (
+          <Link
+            key={post.slug}
+            href={`/posts/${post.slug}`}
+            className="post-card"
+          >
+            <div className="flex post-header">
+              <strong className="post-title">{post.title}</strong>
+              {/* <i className="post-date">{dateFormat(post.date, "mediumDate")}</i> */}
+            </div>
+            <p className="post-desc">{post.desc}</p>
+          </Link>
+        ))}
       </div>
     </div>
-  )
+  );
 }
-
-export default AllPosts

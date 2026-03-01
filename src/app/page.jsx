@@ -7,8 +7,8 @@ export default function Home() {
   return (
     <>
       <div className="container page">
+        <Nav />
         <h1 className="page-title">home</h1>
-        {/* <Nav /> */}
         <div className="main">
           <p className="desc">On a mission to turn dreams into <span>reality</span>. Learning from the best, I'm documenting my path to success.</p>
 

@@ -1,7 +1,10 @@
 import "./globals.css";
 
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sanjarproductions.com";
+
 export const metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Sanjar Productions",
   description: "Blog by Sanjar Productions",
 };

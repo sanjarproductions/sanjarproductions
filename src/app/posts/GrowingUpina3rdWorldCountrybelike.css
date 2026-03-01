@@ -1,0 +1,63 @@
+ /* Dark Mode Reset & Base */
+ body {
+     margin: 0;
+     padding: 0;
+     background-color: #121212;
+     /* Matches the dark background of your homepage */
+     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+     /* Clean sans-serif */
+     color: #e0e0e0;
+     /* Light gray text for readability */
+     -webkit-font-smoothing: antialiased;
+ }
+
+ /* Centered Article Container */
+ .post-container {
+     max-width: 680px;
+     margin: 0 auto;
+     /* padding: 60px 20px; */
+ }
+
+ /* Typography: Title */
+ .post-title {
+     font-size: 42px;
+     line-height: 1.25;
+     font-weight: 700;
+     /* Bolder to match your "home" title */
+     margin-top: 0;
+     margin-bottom: 30px;
+     letter-spacing: -0.016em;
+     word-break: break-word;
+     color: #ffffff;
+     /* Pure white for the heading */
+ }
+
+ /* Post Image */
+ .post-image {
+     margin: 40px 0;
+ }
+
+ .post-image img {
+     width: 100%;
+     height: auto;
+     display: block;
+     border-radius: 4px;
+     /* Slight rounding for a modern feel */
+ }
+
+ /* Section headings (SEO-friendly h2) */
+ .post-content .post-content-heading,
+ .post-content h2 {
+     font-size: 1.5em;
+     font-weight: 600;
+     margin: 1.4em 0 0.4em;
+     color: #fff;
+ }
+
+/* Typography: Body Text */
+ .post-content p {
+     font-size: 20px;
+     line-height: 1.6;
+     margin-top: 0;
+     margin-bottom: 29px;
+ }
